@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/fifth"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ChiTietMonActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_Chitietmon"
+        app:title="@string/food_detail_title"
+        app:navigationIcon="@drawable/ic_back_button"
+        app:titleTextColor="@color/white"
+        android:background="@color/primary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <FrameLayout
+            android:layout_gravity="end"
+            android:layout_marginRight="@dimen/margin_1_2"
+            android:layout_width="@dimen/wrap_cart_width"
+            android:layout_height="?attr/actionBarSize">
+            <FrameLayout
+                android:onClick="openCart"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/miniCart"
+                    android:src="@drawable/ic_cart"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <androidx.cardview.widget.CardView
+                    android:elevation="@dimen/margin_1"
+                    android:layout_gravity="top|left"
+                    app:cardCornerRadius="100dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="22dp"
+                    android:background="@color/cost_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/thongbao_soluong"
+                        android:text="0"
+                        android:visibility="visible"
+                        android:textAlignment="center"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:background="@color/cost_color"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+        </FrameLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+    <FrameLayout
+        android:layout_marginTop="@dimen/margin_1_2"
+        android:layout_marginBottom="@dimen/margin_1_2"
+        android:background="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:onClick="ToHome"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/margin_1_2"
+                android:src="@drawable/logo_app" />
+        </LinearLayout>
+    </FrameLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewChitietmon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+
+            android:layout_marginStart="@dimen/margin_1"
+            android:layout_marginTop="@dimen/margin_1_2"
+            android:layout_marginEnd="@dimen/margin_1"
+            android:elevation="@dimen/margin_1"
+            app:cardCornerRadius="@dimen/radius">
+
+            <ImageView
+                android:id="@+id/hinhmon_chitiet"
+                android:layout_width="@dimen/item_card_detail_height"
+                android:layout_height="@dimen/item_card_detail_height"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_launcher" />
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:id="@+id/linear_thongtin"
+            android:layout_below="@+id/cardViewChitietmon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_1"
+            android:layout_marginTop="@dimen/margin_1_2"
+            android:layout_marginRight="@dimen/margin_1"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_1"
+            android:paddingRight="@dimen/padding_1">
+
+            <TextView
+                android:id="@+id/tenmon_chitiet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_1_2"
+                android:singleLine="true"
+                android:text="Ten Mon"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/text_size_detail"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/gia_chitiet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/background_cost_color"
+                android:padding="@dimen/padding_1"
+                android:text="150,000 đ"
+                android:textColor="@color/fifth"
+                android:textSize="@dimen/text_size_title"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/linear_mua"
+            android:layout_below="@+id/linear_thongtin"
+            android:layout_marginStart="@dimen/margin_1"
+            android:layout_marginTop="@dimen/margin_1"
+            android:layout_marginEnd="@dimen/margin_1"
+            android:background="@drawable/cardview_border_detail"
+            android:paddingTop="40px"
+            android:paddingLeft="40px"
+            android:paddingRight="40px"
+            android:elevation="@dimen/margin_1"
+            app:cardCornerRadius="@dimen/radius">
+
+            <TextView
+                android:id="@+id/mota_chitiet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/padding_1"
+                android:text="Mo ta mon "
+                android:textColor="@color/black"
+                android:textFontWeight="@integer/material_motion_duration_long_1"
+                android:textSize="18dp" />
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/linear_mua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_1_2"
+                android:text="Số lượng"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_title"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_1_2"
+                android:background="@drawable/custom_spinner"
+                android:padding="5dp">
+
+                <Spinner
+                    android:id="@+id/spinner_soluong"
+                    android:layout_width="@dimen/spinner_width"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/grey" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_mua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin_2"
+                android:layout_marginTop="@dimen/margin_1_2"
+                android:layout_marginRight="@dimen/margin_2"
+                android:layout_marginBottom="@dimen/margin_1"
+                android:background="@drawable/custom_button"
+                android:backgroundTint="@color/second"
+                android:text="@string/add_to_cart"
+                android:textColor="@color/fifth"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

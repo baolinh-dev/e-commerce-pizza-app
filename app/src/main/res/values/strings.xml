@@ -1,0 +1,71 @@
+<resources>
+    //title
+    <string name="app_name">Pizza Deli</string>
+    <string name="home">Trang chủ</string>
+    <string name="menu">Danh mục</string>
+    <string name="introduce">Giới thệu chung</string>
+    <string name="contact">Liên hệ</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="checkout">Thanh toán</string>
+    <string name="notify">Thông báo</string>
+    <string name="introduce_info_top">Thông tin về nhà hàng</string>
+    <string name="res_name">Nhà hàng Food Food</string>
+    <string name="res_address">33 Nguyễn Tạo, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng</string>
+    <string name="res_phone">0337 662 557</string>
+    <string name="res_note">Góp ý, đóng góp và đánh giá</string>
+    <string name="res_note_valid">Bạn chưa nhập lời nhắn!</string>
+
+    <string name="continue_buy">Tiếp tục chọn món</string>
+    <string name="buy">Chọn món</string>
+    <string name="menu_detail_title">Chi tiết danh mục</string>
+    <string name="food_detail_title">Chi tiết món</string>
+
+    <string name="checkout_info">Thông tin thanh toán</string>
+    <string name="user_name">Tên khách hàng</string>
+    <string name="user_email">Email</string>
+    <string name="user_phone">Số điện thoại</string>
+    <string name="user_note">Ghi chú</string>
+    <string name="type_user_name">Nhập tên khách hàng</string>
+    <string name="type_user_email">vd: appfood@gmail.com</string>
+    <string name="type_user_phone">Nhập số điện thoại</string>
+    <string name="type_user_note">Nhập lời nhắn...</string>
+
+    /label button
+    <string name="add_to_cart">Thêm vào giỏ</string>
+    <string name="payment">Thanh toán</string>
+    <string name="payment_last">Thanh toán thôi!</string>
+    <string name="to_Home">Về trang chủ</string>
+    <string name="sent_mess">Gửi</string>
+    <string name="total_price">Tổng cộng:</string>
+    <string name="yes">Đồng ý</string>
+    <string name="no">Không</string>
+
+    //thông báo!!!
+    <string name="error_network">Không có Internet!</string>
+    <string name="error_server">Không thể kết nối với Server!</string>
+    <string name="empty_cart_notify">Giỏ hàng trống!</string>
+    <string name="validation">Vui lòng nhập đầy đủ thông tin!</string>
+    <string name="none_name">Vui lòng nhập tên khách hàng!</string>
+    <string name="none_email">Vui lòng nhập email!</string>
+    <string name="none_phone">Vui lòng nhập số điện thoại!</string>
+    <string name="invalid_email">Email chưa đúng định dạng!</string>
+    <string name="overload_phone">Số điện thoại không được vượt quá</string>
+    <string name="char_style">ký tự</string>
+
+    <string name="order_send_success">Thành công!</string>
+    <string name="order_send_success_show">Thành công</string>
+    <string name="order_send_error">Lỗi khi gửi đơn hàng!</string>
+    <string name="empty_cart">Vui lòng chọn món trước khi thanh toán!</string>
+    <string name="ask_to_delete">Bạn muốn xóa món này?</string>
+    <string name="mess_send_success">Đã gửi thành công!</string>
+    <string name="mess_send_error">Gửi không thành công!</string>
+    <string name="order_success">Đơn hàng của bạn đã được gửi đi!</string>
+
+    //link hình ảnh
+    <string name="slide_1">https://image.dhgate.com/0x0s/f2-albu-g4-M00-A4-C7-rBVaEVerXZWAP2BFAAMV7Gv6scw532.jpg/custom-3d-wallpaper-for-walls-3d-pizza-shop.jpg</string>
+    <string name="slide_2">https://thumbs.dreamstime.com/b/pizza-pizzeria-italian-horizontal-template-flyer-baner-ingredients-text-wooden-background-fast-food-top-view-pizza-154751161.jpg</string>
+    <string name="slide_3">https://www.familystylepizzas.com/files/banner/family-style-pizza-banner-1.jpg</string>
+    <string name="slide_4">https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/e5ac11121346431.60c3abd5e78c0.jpg</string>
+    <string name="title_activity_gioi_thieu_chung">GioiThieuChungActivity</string>
+
+</resources>
