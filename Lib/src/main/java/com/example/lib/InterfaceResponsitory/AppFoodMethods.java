@@ -1,14 +1,18 @@
 package com.example.lib.InterfaceResponsitory;
 
 import com.example.lib.model.DanhMuc;
+import com.example.lib.model.KhachHang;
 import com.example.lib.model.Mon;
 import com.example.lib.model.User;
+
+import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface AppFoodMethods {
     @GET("danhmuc.php")
@@ -16,6 +20,9 @@ public interface AppFoodMethods {
 
     @GET("monngaunhien.php")
     Observable<Mon> GET_MonNgauNhien();
+
+    @GET("user.php")
+    Observable<List<KhachHang>> GET_KhachHang(@Query("search") String searchKeyword);
 
     @POST("chitietdanhmuc.php")
     @FormUrlEncoded
@@ -28,6 +35,7 @@ public interface AppFoodMethods {
     Observable<User> POST_DangKi(
             @Field("username") String username,
             @Field("password") String password,
+            @Field("fullname") String fullname,
             @Field("email") String email,
             @Field("phone") String phone
     );

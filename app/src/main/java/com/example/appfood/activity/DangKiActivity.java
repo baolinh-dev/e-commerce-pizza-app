@@ -30,7 +30,7 @@ import java.security.NoSuchAlgorithmException;
 
 
 public class DangKiActivity extends AppCompatActivity {
-    private EditText txtConfirmpassword, txtEmail, txtPhone, txtPassword, txtUsername;
+    private EditText txtConfirmpassword, txtEmail, txtPhone, txtPassword, txtUsername, txtFullname;
     private AppCompatButton btnRegister;
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -53,32 +53,13 @@ public class DangKiActivity extends AppCompatActivity {
         });
     }
 
-    public static String encodePassword(String password) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error hashing password", e);
-        }
-    }
-
     private void dangki() {
         String username = txtUsername.getText().toString().trim();
         String password = txtPassword.getText().toString().trim();
         String confirmPassword  = txtConfirmpassword.getText().toString().trim();
+        String fullname = txtFullname.getText().toString().trim();
         String email = txtEmail.getText().toString().trim();
         String phone = txtPhone.getText().toString().trim();
-
-        String hashedPassword = encodePassword(password);
-        Log.d("TAG", "Hashed password: " + hashedPassword);
-
 
         if(TextUtils.isEmpty(username)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập user name", Toast.LENGTH_SHORT).show();
@@ -86,29 +67,31 @@ public class DangKiActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập mật khẩu", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(confirmPassword)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập lại mật khẩu", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(email)) {
+        }  else if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập email", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(phone)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập phone", Toast.LENGTH_SHORT).show();
         } else {
             if(password.equals(confirmPassword)) {
-                compositeDisposable.add(appFoodMethods.POST_DangKi(username, password, email, phone)
+                compositeDisposable.add(appFoodMethods.POST_DangKi(username, password, fullname, email, phone)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 user -> {
-                                    if(user.isSuccess()) {
-                                        Utils.user_current.setUsername(username);
-                                        Utils.user_current.setPassword(password);
-                                        Intent intent = new Intent(getApplicationContext(), DangNhapActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), user.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
+                                    // Chuyển sang trang đăng nhập sau khi đăng ký thành công
+                                    Utils.user_current.setUsername(username);
+                                    Utils.user_current.setPassword(password);
+                                    Intent intent = new Intent(getApplicationContext(), DangNhapActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 },
                                 throwable -> {
-                                    Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Utils.user_current.setUsername(username);
+                                    Utils.user_current.setPassword(password);
+                                    Intent intent = new Intent(getApplicationContext(), DangNhapActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                    Log.e("Dang ki tai khoan", "Error: " + throwable.getMessage());
                                 }
                         ));
             } else {
@@ -122,9 +105,9 @@ public class DangKiActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
         txtConfirmpassword = findViewById(R.id.txtConfirmPassword);
+        txtFullname = findViewById(R.id.txtFullname);
         txtEmail = findViewById(R.id.txtEmail);
         txtPhone = findViewById(R.id.txtPhone);
-
         btnRegister = findViewById(R.id.btnRegister);
         appFoodMethods = RetrofitClient.getRetrofit(Url.AppFood_Url).create(AppFoodMethods.class);
     }

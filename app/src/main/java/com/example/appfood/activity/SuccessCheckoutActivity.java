@@ -11,9 +11,11 @@ import com.example.appfood.R;
 import com.example.lib.common.Show;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SuccessCheckoutActivity extends AppCompatActivity {
-    TextView txt_tenkhachhang,txt_email,txt_sodienthoai,txt_ghichu,txt_tongtien;
+    TextView txt_tenkhachhang,txt_email,txt_sodienthoai,txt_ghichu,txt_tongtien, txt_ngaydathang;
     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +26,21 @@ public class SuccessCheckoutActivity extends AppCompatActivity {
     }
 
     private void getThongTinKhachHang() {
+// Tạo đối tượng SimpleDateFormat với định dạng "yyyy-MM-dd"
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+// Lấy ngày hiện tại
+        Date now = new Date();
+
+// Định dạng ngày hiện tại theo định dạng "yyyy-MM-dd"
+        String orderDate = dateFormat.format(now);
+
+
         txt_tenkhachhang.setText(ThongTinKhachHangActivity.user_name.getText().toString());
         txt_email.setText(ThongTinKhachHangActivity.user_email.getText().toString());
         txt_sodienthoai.setText(ThongTinKhachHangActivity.user_phone.getText().toString());
         txt_ghichu.setText(ThongTinKhachHangActivity.user_note.getText().toString());
+        txt_ngaydathang.setText(orderDate);
         long thanhtien = Show.tinhTongTien();
         txt_tongtien.setText(decimalFormat.format(thanhtien)+" đ");
         Show.listGiohang.clear();
@@ -38,6 +51,7 @@ public class SuccessCheckoutActivity extends AppCompatActivity {
         txt_email = findViewById(R.id.txt_email);
         txt_sodienthoai = findViewById(R.id.txt_sodienthoai);
         txt_ghichu = findViewById(R.id.txt_ghichu);
+        txt_ngaydathang = findViewById(R.id.txt_ngaydathang);
         txt_tongtien = findViewById(R.id.txt_tongtien);
     }
 

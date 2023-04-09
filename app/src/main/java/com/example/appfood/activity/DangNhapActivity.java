@@ -1,8 +1,10 @@
 package com.example.appfood.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -84,11 +86,24 @@ public class DangNhapActivity extends AppCompatActivity {
                             .subscribe(
                                     user -> {
                                         Utils.user_current = user.getResult().get(0);
+
+                                        // Lưu thông tin đăng nhập của người dùng bằng SharedPreferences
+                                        SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("username", userNameText);
+                                        editor.putString("fullname", user.getResult().get(0).getFullname());
+                                        editor.putString("email", user.getResult().get(0).getEmail());
+                                        editor.putString("phone", user.getResult().get(0).getPhone());
+                                        // Lưu trạng thái đăng nhập
+                                        editor.putBoolean("isLoggedIn", true);
+                                        editor.apply();
+
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
+                                        finish(); // Kết thúc activity đăng nhập
                                     },
                                     throwable -> {
-                                        Toast.makeText(getApplicationContext(), "Vui lòng kiểm tra lại tài khoản hoặc mật khảu", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu", Toast.LENGTH_LONG).show();
                                     }
                             ));
                 }

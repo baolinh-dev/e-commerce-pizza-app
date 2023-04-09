@@ -111,18 +111,19 @@
             android:layout_marginBottom="@dimen/margin_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/text_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_1_2"
-                android:text="@string/res_phone"
                 android:background="@color/second"
-                android:textSize="@dimen/text_size_meidum"
-                android:textStyle="bold"
                 android:padding="@dimen/padding_1"
+                android:text="@string/res_phone"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textSize="@dimen/text_size_meidum"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
     <ScrollView

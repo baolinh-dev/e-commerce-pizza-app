@@ -1,6 +1,7 @@
 package com.example.appfood.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,10 +34,14 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ThongTinKhachHangActivity extends AppCompatActivity {
     Toolbar toolbarThanhToan;
     static Button btn_xacnhanthanhtoan;
     public static EditText user_name;
+    public static EditText user_fullname;
     static EditText user_email;
     static EditText user_phone;
     static EditText user_note;
@@ -49,13 +54,42 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_tin_khach_hang);
+
+        // Ánh xạ các thành phần UI và thiết lập Toolbar
         getViewId();
         actionToolbar();
+
+        // Kiểm tra kết nối mạng
         if(NetworkConnection.isConnected(this)) {
+            // Nếu có kết nối mạng, tiếp tục thực hiện các tác vụ khác
             tinhTongTienGioHang();
             xacnhanthanhtoan();
-        }else{
-            Show.Notify(this,getString(R.string.error_network));
+
+            // Lấy giá trị username từ SharedPreferences
+            SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+            String username = sharedPreferences.getString("username", "");
+            String fullname = sharedPreferences.getString("fullname", "");
+            String email = sharedPreferences.getString("email", "");
+            String phone = sharedPreferences.getString("phone", "");
+
+            // Đưa giá trị username vào TextView
+            TextView txtUsername = findViewById(R.id.user_name);
+            TextView txtUserfullname = findViewById(R.id.user_fullname);
+            TextView txtUseremail = findViewById(R.id.user_email);
+            TextView txtUserphone = findViewById(R.id.user_phone);
+
+            Log.d("ThongTinKhachHa", "Username: " + username);
+            Log.d("ThongTinKhachHa", "Fullname: " + fullname);
+            Log.d("ThongTinKhachHa", "Email: " + email);
+            Log.d("ThongTinKhachHa", "Phone: " + phone);
+
+            txtUsername.setText(username);
+            txtUserfullname.setText(fullname);
+            txtUseremail.setText(email);
+            txtUserphone.setText(phone);
+        } else {
+            // Nếu không có kết nối mạng, hiển thị thông báo lỗi và kết thúc activity
+            Show.Notify(this, getString(R.string.error_network));
             finish();
         }
     }

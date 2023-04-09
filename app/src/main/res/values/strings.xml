@@ -11,7 +11,7 @@
     <string name="introduce_info_top">Thông tin về nhà hàng</string>
     <string name="res_name">Nhà hàng Food Food</string>
     <string name="res_address">33 Nguyễn Tạo, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng</string>
-    <string name="res_phone">0337 662 557</string>
+    <string name="res_phone">0768494121</string>
     <string name="res_note">Góp ý, đóng góp và đánh giá</string>
     <string name="res_note_valid">Bạn chưa nhập lời nhắn!</string>
 
@@ -21,11 +21,11 @@
     <string name="food_detail_title">Chi tiết món</string>
 
     <string name="checkout_info">Thông tin thanh toán</string>
-    <string name="user_name">Tên khách hàng</string>
+    <string name="user_name">Username</string>
     <string name="user_email">Email</string>
     <string name="user_phone">Số điện thoại</string>
     <string name="user_note">Ghi chú</string>
-    <string name="type_user_name">Nhập tên khách hàng</string>
+    <string name="type_user_name">Nhập tên username</string>
     <string name="type_user_email">vd: appfood@gmail.com</string>
     <string name="type_user_phone">Nhập số điện thoại</string>
     <string name="type_user_note">Nhập lời nhắn...</string>

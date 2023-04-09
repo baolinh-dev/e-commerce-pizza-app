@@ -1,21 +1,20 @@
 package com.example.lib.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
-public class User {
-    int id;
-    String username;
-    String password;
-    String email;
-    String phone;
-    String fullname;
+public class KhachHang {
+    private int id;
+    private String username;
+    private String email;
+    private String phone;
 
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public KhachHang(int id, String username, String email, String phone) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
     }
 
     public int getId() {
@@ -32,14 +31,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -60,7 +51,7 @@ public class User {
 
     boolean success;
     String message;
-    List<User> result;
+    List<KhachHang> result;
 
     public boolean isSuccess() {
         return success;
@@ -78,11 +69,11 @@ public class User {
         this.message = message;
     }
 
-    public List<User> getResult() {
+    public List<KhachHang> getResult() {
         return result;
     }
 
-    public void setResult(List<User> result) {
+    public void setResult(List<KhachHang> result) {
         this.result = result;
     }
 }
