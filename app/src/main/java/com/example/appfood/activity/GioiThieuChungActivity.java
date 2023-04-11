@@ -12,6 +12,14 @@ import com.example.appfood.R;
 import com.example.lib.common.NetworkConnection;
 import com.example.lib.common.Show;
 
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.CameraUpdate;
+
 public class GioiThieuChungActivity extends AppCompatActivity {
     Toolbar toolbar_Gioithieuchung;
     TextView thongbao_soluong;
@@ -23,7 +31,7 @@ public class GioiThieuChungActivity extends AppCompatActivity {
         getViewId();
         actionToolbar();
 
-        //check network
+        // Kiểm tra kết nối mạng và thực hiện thao tác
         if (NetworkConnection.isConnected(this)) {
             Show.thayDoiSoLuongGioHangNho(thongbao_soluong);
         } else {

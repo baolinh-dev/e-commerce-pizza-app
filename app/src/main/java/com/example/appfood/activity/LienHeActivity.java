@@ -65,7 +65,6 @@ public class LienHeActivity extends AppCompatActivity {
         text_mess = findViewById(R.id.text_mess);
         mess_label = findViewById(R.id.mess_label);
         scroll_mess = findViewById(R.id.scroll_mess);
-        img_mess = findViewById(R.id.img_mess);
         mess_error = findViewById(R.id.mess_error);
     }
 
@@ -101,7 +100,7 @@ public class LienHeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-        public void sentMess(View view) {
+    public void sentMess(View view) {
         SmsManager smsManager = SmsManager.getDefault();
 
         Intent intent = new Intent("ACTION_MSG_SENT");

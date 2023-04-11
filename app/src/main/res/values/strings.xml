@@ -1,6 +1,6 @@
 <resources>
     //title
-    <string name="app_name">Pizza Deli</string>
+    <string name="app_name"></string>
     <string name="home">Trang chủ</string>
     <string name="menu">Danh mục</string>
     <string name="introduce">Giới thệu chung</string>
@@ -9,7 +9,7 @@
     <string name="checkout">Thanh toán</string>
     <string name="notify">Thông báo</string>
     <string name="introduce_info_top">Thông tin về nhà hàng</string>
-    <string name="res_name">Nhà hàng Food Food</string>
+    <string name="res_name">Pizza Deli</string>
     <string name="res_address">33 Nguyễn Tạo, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng</string>
     <string name="res_phone">0768494121</string>
     <string name="res_note">Góp ý, đóng góp và đánh giá</string>
@@ -67,5 +67,6 @@
     <string name="slide_3">https://www.familystylepizzas.com/files/banner/family-style-pizza-banner-1.jpg</string>
     <string name="slide_4">https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/e5ac11121346431.60c3abd5e78c0.jpg</string>
     <string name="title_activity_gioi_thieu_chung">GioiThieuChungActivity</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

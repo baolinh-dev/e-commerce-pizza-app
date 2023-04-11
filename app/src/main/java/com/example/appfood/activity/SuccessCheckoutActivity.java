@@ -26,15 +26,14 @@ public class SuccessCheckoutActivity extends AppCompatActivity {
     }
 
     private void getThongTinKhachHang() {
-// Tạo đối tượng SimpleDateFormat với định dạng "yyyy-MM-dd"
+        // Tạo đối tượng SimpleDateFormat với định dạng "yyyy-MM-dd"
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-// Lấy ngày hiện tại
+        // Lấy ngày hiện tại
         Date now = new Date();
 
-// Định dạng ngày hiện tại theo định dạng "yyyy-MM-dd"
+        // Định dạng ngày hiện tại theo định dạng "yyyy-MM-dd"
         String orderDate = dateFormat.format(now);
-
 
         txt_tenkhachhang.setText(ThongTinKhachHangActivity.user_name.getText().toString());
         txt_email.setText(ThongTinKhachHangActivity.user_email.getText().toString());
