@@ -123,6 +123,23 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="Họ và tên"
+                            android:textColor="@color/second"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/txt_fullname"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/text_size"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_1_2"
+                            android:layout_marginBottom="@dimen/margin_1"
+                            android:text="Họ và tên khách hàng"
+                            android:textColor="@color/black"/>
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="@string/user_email"
                             android:textColor="@color/second"
                             android:textStyle="bold" />

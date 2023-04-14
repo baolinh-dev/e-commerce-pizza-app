@@ -78,10 +78,10 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
             TextView txtUseremail = findViewById(R.id.user_email);
             TextView txtUserphone = findViewById(R.id.user_phone);
 
-            Log.d("ThongTinKhachHa", "Username: " + username);
-            Log.d("ThongTinKhachHa", "Fullname: " + fullname);
-            Log.d("ThongTinKhachHa", "Email: " + email);
-            Log.d("ThongTinKhachHa", "Phone: " + phone);
+//            Log.d("ThongTinKhachHa", "Username: " + username);
+//            Log.d("ThongTinKhachHa", "Fullname: " + fullname);
+//            Log.d("ThongTinKhachHa", "Email: " + email);
+//            Log.d("ThongTinKhachHa", "Phone: " + phone);
 
             txtUsername.setText(username);
             txtUserfullname.setText(fullname);
@@ -100,6 +100,8 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
             //TaoDonHang
             public void onClick(View view) {
                 final String name = user_name.getText().toString();
+                final String fullname = user_fullname.getText().toString();
+                Log.d("fullname", fullname);
                 final String email = user_email.getText().toString();
                 final String phone = user_phone.getText().toString();
                 final String totalPrice = String.valueOf(Show.tinhTongTien());;
@@ -114,61 +116,17 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
                         public void onResponse(final String madonhang) {
                             Log.d("id",madonhang);
 
-                            //post chitietdonhang
-                            if(Integer.parseInt(madonhang) > 0)
-                            {
-                                RequestQueue detailQueue = Volley.newRequestQueue(getApplicationContext());
-                                StringRequest detailRequest = new StringRequest(Request.Method.POST, Url.postBillDetail, new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        if(response.equals("1")) {
-                                            Show.Notify(getApplicationContext(),getString(R.string.order_send_success));
+                            if(Integer.parseInt(madonhang) > 0) {
+                                Show.Notify(getApplicationContext(),getString(R.string.order_send_success));
 
-                                            //trở về home
-                                            Intent thanhcong = new Intent(getApplicationContext(),SuccessCheckoutActivity.class);
-                                            startActivity(thanhcong);
-                                        }else{
-                                            Show.Notify(getApplicationContext(),getString(R.string.order_send_error));
-                                        }
-                                    }
-                                }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Show.Notify(getApplicationContext(),getString(R.string.order_send_error));
-                                    }
-                                }){
-                                    @Nullable
-                                    @Override
-                                    //post chitietdonhang
-                                    protected Map<String, String> getParams() throws AuthFailureError {
-                                        JSONArray jsonArray = new JSONArray();
-                                        for(int i=0; i < Show.listGiohang.size();i++) {
-                                            JSONObject jsonObject = new JSONObject();
-                                            try {
-                                                jsonObject.put("madonhang",madonhang);
-                                                jsonObject.put("mamon",Show.listGiohang.get(i).getMamon());
-                                                jsonObject.put("tenmon",Show.listGiohang.get(i).getTenmon());
-                                                jsonObject.put("gia",Show.listGiohang.get(i).getGia());
-                                                jsonObject.put("soluong",Show.listGiohang.get(i).getSoluong());
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                            jsonArray.put(jsonObject);
-                                        }
-                                        //Gửi dữ liệu lên
-                                        HashMap<String,String> hashMap = new HashMap<String,String>();
-                                        hashMap.put("json",jsonArray.toString());
-                                        return hashMap;
-                                    }
-                                };
-                                detailQueue.add(detailRequest);
+                                //trở về home
+                                Intent thanhcong = new Intent(getApplicationContext(),SuccessCheckoutActivity.class);
+                                startActivity(thanhcong);
                             }
                         }
-                    }, new Response.ErrorListener()
-                    {
+                    }, new Response.ErrorListener() {
                         @Override
-                        public void onErrorResponse(VolleyError error)
-                        {
+                        public void onErrorResponse(VolleyError error) {
                             Show.Notify(getApplicationContext(),getString(R.string.order_send_error));
                         }
                     }){
@@ -179,6 +137,7 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
                         {
                             HashMap<String,String> hashMap = new HashMap<String,String>();
                             hashMap.put("tenkhachhang",name);
+                            hashMap.put("fullname",fullname);
                             hashMap.put("email",email);
                             hashMap.put("sodienthoai",phone);
                             hashMap.put("tongtien",totalPrice);
@@ -201,6 +160,7 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
         toolbarThanhToan = findViewById(R.id.toolbarThanhToan);
         btn_xacnhanthanhtoan = findViewById(R.id.btn_xacnhanthanhtoan);
         user_name = findViewById(R.id.user_name);
+        user_fullname = findViewById(R.id.user_fullname);
         user_email = findViewById(R.id.user_email);
         user_phone = findViewById(R.id.user_phone);
         textview_tongtien= findViewById(R.id.textview_tongtien);

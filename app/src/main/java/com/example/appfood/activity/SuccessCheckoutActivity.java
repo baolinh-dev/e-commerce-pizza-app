@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SuccessCheckoutActivity extends AppCompatActivity {
-    TextView txt_tenkhachhang,txt_email,txt_sodienthoai,txt_ghichu,txt_tongtien, txt_ngaydathang;
+    TextView txt_tenkhachhang,txt_email,txt_sodienthoai,txt_ghichu,txt_tongtien, txt_ngaydathang, txt_fullname;
     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class SuccessCheckoutActivity extends AppCompatActivity {
         String orderDate = dateFormat.format(now);
 
         txt_tenkhachhang.setText(ThongTinKhachHangActivity.user_name.getText().toString());
+        txt_fullname.setText(ThongTinKhachHangActivity.user_fullname.getText().toString());
         txt_email.setText(ThongTinKhachHangActivity.user_email.getText().toString());
         txt_sodienthoai.setText(ThongTinKhachHangActivity.user_phone.getText().toString());
         txt_ghichu.setText(ThongTinKhachHangActivity.user_note.getText().toString());
@@ -47,6 +48,7 @@ public class SuccessCheckoutActivity extends AppCompatActivity {
 
     private void getViewId() {
         txt_tenkhachhang = findViewById(R.id.txt_tenkhachhang);
+        txt_fullname = findViewById(R.id.txt_fullname);
         txt_email = findViewById(R.id.txt_email);
         txt_sodienthoai = findViewById(R.id.txt_sodienthoai);
         txt_ghichu = findViewById(R.id.txt_ghichu);
