@@ -60,6 +60,7 @@ public class DangKiActivity extends AppCompatActivity {
         String fullname = txtFullname.getText().toString().trim();
         String email = txtEmail.getText().toString().trim();
         String phone = txtPhone.getText().toString().trim();
+        String role = "user";
 
         if(TextUtils.isEmpty(username)) {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập user name", Toast.LENGTH_SHORT).show();
@@ -73,7 +74,7 @@ public class DangKiActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập phone", Toast.LENGTH_SHORT).show();
         } else {
             if(password.equals(confirmPassword)) {
-                compositeDisposable.add(appFoodMethods.POST_DangKi(username, password, fullname, email, phone)
+                compositeDisposable.add(appFoodMethods.POST_DangKi(username, password, fullname, email, phone, role)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -86,11 +87,6 @@ public class DangKiActivity extends AppCompatActivity {
                                     finish();
                                 },
                                 throwable -> {
-                                    Utils.user_current.setUsername(username);
-                                    Utils.user_current.setPassword(password);
-                                    Intent intent = new Intent(getApplicationContext(), DangNhapActivity.class);
-                                    startActivity(intent);
-                                    finish();
                                     Log.e("Dang ki tai khoan", "Error: " + throwable.getMessage());
                                 }
                         ));

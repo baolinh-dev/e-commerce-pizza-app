@@ -30,14 +30,15 @@ public interface AppFoodMethods {
             @Field("madanhmuc") int madanhmuc
     );
 
-    @POST("dangki.php")
+    @POST("dangkimobile.php")
     @FormUrlEncoded
     Observable<User> POST_DangKi(
             @Field("username") String username,
             @Field("password") String password,
             @Field("fullname") String fullname,
             @Field("email") String email,
-            @Field("phone") String phone
+            @Field("phone") String phone,
+            @Field("role") String role
     );
 
     @POST("dangnhap.php")
