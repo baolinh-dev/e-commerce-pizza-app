@@ -4,8 +4,8 @@ plugins {
 }
 
 android {
-    compileSdk 31
-
+    compileSdk 34
+    namespace 'com.example.appfood'
     defaultConfig {
         applicationId "com.example.appfood"
         minSdk 22

@@ -4,6 +4,7 @@ import com.example.lib.model.DanhMuc;
 import com.example.lib.model.KhachHang;
 import com.example.lib.model.Mon;
 import com.example.lib.model.User;
+import com.example.lib.model.OrderResponse;
 
 import java.util.List;
 
@@ -46,5 +47,16 @@ public interface AppFoodMethods {
     Observable<User> POST_DangNhap(
             @Field("username") String username,
             @Field("password") String password
+    );
+
+    @POST("taodonhang.php")
+    @FormUrlEncoded
+    Observable<OrderResponse> POST_TaoDonHang(
+            @Field("tenkhachhang") String tenkhachhang,
+            @Field("fullname") String fullname,
+            @Field("email") String email,
+            @Field("sodienthoai") String sodienthoai,
+            @Field("tongtien") String tongtien,
+            @Field("ghichu") String ghichu
     );
 }

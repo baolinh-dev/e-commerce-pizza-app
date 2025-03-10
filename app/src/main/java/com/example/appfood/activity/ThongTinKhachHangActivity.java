@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.functions.Consumer;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,10 +25,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.appfood.R;
+import com.example.lib.InterfaceResponsitory.AppFoodMethods;
+import com.example.lib.RetrofitClient;
 import com.example.lib.common.NetworkConnection;
 import com.example.lib.common.Show;
 import com.example.lib.common.Url;
 import com.example.lib.common.Validate;
+import com.example.lib.InterfaceResponsitory.AppFoodMethods;
+import com.example.lib.model.KhachHang;
+import com.example.lib.model.OrderResponse;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +45,8 @@ import java.util.Map;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class ThongTinKhachHangActivity extends AppCompatActivity {
     Toolbar toolbarThanhToan;
@@ -49,6 +60,9 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
     static TextView message_name;
     static TextView message_email;
     static TextView message_phone;
+
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    AppFoodMethods appFoodMethods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,64 +111,51 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
     public void xacnhanthanhtoan() {
         btn_xacnhanthanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
-            //TaoDonHang
             public void onClick(View view) {
-                final String name = user_name.getText().toString();
-                final String fullname = user_fullname.getText().toString();
-                Log.d("fullname", fullname);
-                final String email = user_email.getText().toString();
-                final String phone = user_phone.getText().toString();
-                final String totalPrice = String.valueOf(Show.tinhTongTien());;
-                final String note = user_note.getText().toString();
+                final String name = user_name.getText().toString().trim();
+                final String fullname = user_fullname.getText().toString().trim();
+                final String email = user_email.getText().toString().trim();
+                final String phone = user_phone.getText().toString().trim();
+                final String totalPrice = String.valueOf(Show.tinhTongTien()).trim();
+                final String note = user_note.getText().toString().trim();
 
-                if(Validate.isValidName(name,message_name)
-                        && Validate.isValidEmail(email,message_email)
-                        && Validate.isValidPhone(phone,10,message_phone)) {
-                    RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, Url.postUserInfo, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(final String madonhang) {
-                            Log.d("id",madonhang);
+                if (Validate.isValidName(name, message_name) &&
+                        Validate.isValidEmail(email, message_email) &&
+                        Validate.isValidPhone(phone, 10, message_phone)) {
 
-                            if(Integer.parseInt(madonhang) > 0) {
-                                Show.Notify(getApplicationContext(),getString(R.string.order_send_success));
+                    compositeDisposable.add(appFoodMethods.POST_TaoDonHang(name, fullname, email, phone, totalPrice, note)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<OrderResponse>() {
+                                @Override
+                                public void accept(OrderResponse response) throws Throwable {
+                                    if (response.isSuccess()) {
+                                        Show.Notify(getApplicationContext(), getString(R.string.order_send_success));
 
-                                //trở về home
-                                Intent thanhcong = new Intent(getApplicationContext(),SuccessCheckoutActivity.class);
-                                startActivity(thanhcong);
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Show.Notify(getApplicationContext(),getString(R.string.order_send_error));
-                        }
-                    }){
-                        @Nullable
-                        @Override
-                        //post donhang
-                        protected Map<String, String> getParams() throws AuthFailureError
-                        {
-                            HashMap<String,String> hashMap = new HashMap<String,String>();
-                            hashMap.put("tenkhachhang",name);
-                            hashMap.put("fullname",fullname);
-                            hashMap.put("email",email);
-                            hashMap.put("sodienthoai",phone);
-                            hashMap.put("tongtien",totalPrice);
-                            hashMap.put("ghichu",note);
-
-                            return hashMap;
-                        }
-                    };
-                    requestQueue.add(stringRequest);
-                }else{
-                    Validate.isValidName(name,message_name);
-                    Validate.isValidEmail(email,message_email);
-                    Validate.isValidPhone(phone,10,message_phone);
+                                        // Chuyển sang màn hình thành công
+                                        Intent thanhcong = new Intent(getApplicationContext(), SuccessCheckoutActivity.class);
+                                        startActivity(thanhcong);
+                                    } else {
+                                        Show.Notify(getApplicationContext(), response.getMessage());
+                                    }
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Throwable {
+                                    Show.Notify(getApplicationContext(), getString(R.string.order_send_error));
+                                    Log.e("Order", "Lỗi: " + throwable.getMessage());
+                                }
+                            }));
+                } else {
+                    Validate.isValidName(name, message_name);
+                    Validate.isValidEmail(email, message_email);
+                    Validate.isValidPhone(phone, 10, message_phone);
                 }
             }
         });
     }
+
+
 
     private void getViewId() {
         toolbarThanhToan = findViewById(R.id.toolbarThanhToan);
@@ -168,6 +169,7 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
         message_email= findViewById(R.id.message_email);
         message_phone= findViewById(R.id.message_phone);
         user_note= findViewById(R.id.user_note);
+        appFoodMethods = RetrofitClient.getRetrofit(Url.AppFood_Url).create(AppFoodMethods.class);
     }
 
     private void actionToolbar() {
